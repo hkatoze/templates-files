@@ -115,6 +115,10 @@
         font-size: 12px;
       }
 
+      .bottom .totals-left{
+       font-size: 13px;
+      }
+
       .totals .total-ttc {
         background-color: orange;
         color: white;
@@ -221,7 +225,7 @@
       <br />
       <br />
       <div class="bottom">
-        <div class="">
+        <div class="totals-left">
           <div>
             <strong>Arrêtée la présente Facture à la somme de :</strong>
           </div>
@@ -263,6 +267,11 @@
               <td class="numeric remise-amount">
                 -{{facture.remiseAmount}} FCFA
               </td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
             </tr>
             {{/if}} {{#if facture.totalAmountAfterTax}}
             <tr>
