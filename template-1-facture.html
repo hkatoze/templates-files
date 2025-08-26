@@ -16,9 +16,7 @@
         margin: 40px;
         color: #333;
       }
-      .logo {
-        width: 100px;
-      }
+      
       /* ton contenu principal doit "prendre l’espace" restant */
       main {
         flex: 1;
@@ -50,7 +48,7 @@
       }
 
       .header img {
-        max-width: 150px;
+        max-width: 250px;
       }
 
       .invoice-info {
@@ -100,7 +98,7 @@
       }
 
       .totals {
-        width: 60%;
+        width: 80%;
         margin-left: auto;
         border: none;
       }
@@ -148,6 +146,10 @@
 
       .footer div {
         text-align: center;
+      }
+
+      #items .designation {
+       text-align: left;
       }
 
       .remark {
@@ -212,8 +214,10 @@
       <br />
       <div class="bottom">
         <div class="">
-          <h4>Arrêtée la présente Facture à la somme de :</h4>
-          <p>{{facture.totalAmountAfterTaxInLetter}} FCFA</p>
+          <div>
+            <strong>Arrêtée la présente Facture à la somme de :</strong>
+          </div>
+          <div>{{facture.totalAmountAfterTaxInLetter}} FCFA</div>
           {{#if facture.paiementModality}}
           <p>
             Modalité de paiement : {{facture.paiementModality}}% à la commande
@@ -269,17 +273,15 @@
       {{#if facture.detailsSupp}}
       <p class="remark">Remarque : {{facture.detailsSupp}}</p>
       {{/if}}
-
-      <!-- Footer -->
-      <div class="footer">
-        <div>POUR ACCORD</div>
-        <div>LE PRESTATAIRE</div>
-      </div>
-      <br />
-      <br /><br />
-      <br />
     </main>
-
+    <!-- Footer -->
+    <div class="footer">
+      <div>POUR ACCORD</div>
+      <div>LE PRESTATAIRE</div>
+    </div>
+    <br />
+    <br /><br />
+    <br />
     <footer style="margin-top: 40px; font-size: 12px; text-align: center">
       {{company.nomEntreprise}} - {{company.siegeSocial}}- Rccm :
       {{company.rccm}}- Email : {{company.adresseEmailEntreprise}} - Tél :
