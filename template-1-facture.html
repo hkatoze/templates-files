@@ -13,7 +13,7 @@
       }
       body {
         font-family: Arial, sans-serif;
-        
+        margin: 40px;
         color: #333;
       }
       
@@ -58,6 +58,11 @@
       .invoice-info .proforma-title {
         font-size: 24px; /* tu peux ajuster la taille */
         font-weight: bold;
+      }
+
+      .invoice-info #invoice-number{
+        font-size: 24px; 
+        color: orange;
       }
       .client-info {
         margin: 20px 0;
@@ -169,7 +174,7 @@
         />
         <div class="invoice-info">
           <div class="proforma-title">{{facture.type}}</div>
-          <div>N°: <span id="invoice-number">{{facture.id}}</span></div>
+          <div><span id="invoice-number">N°: {{facture.formattedId}}</span></div>
           <div>Date: <span id="invoice-date">{{facture.createDate}}</span></div>
         </div>
       </div>
