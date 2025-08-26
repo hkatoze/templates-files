@@ -16,7 +16,9 @@
         margin: 40px;
         color: #333;
       }
-
+      .logo {
+        width: 100px;
+      }
       /* ton contenu principal doit "prendre l’espace" restant */
       main {
         flex: 1;
@@ -98,7 +100,7 @@
       }
 
       .totals {
-        width: 100%;
+        width: 60%;
         margin-left: auto;
         border: none;
       }
@@ -106,6 +108,7 @@
       .totals td {
         border: none;
         padding: 10px 0;
+        font-size: 13px;
       }
 
       .totals .total-ttc {
@@ -146,7 +149,7 @@
       .footer div {
         text-align: center;
       }
-   
+
       .remark {
         font-style: italic;
         margin-top: 10px;
@@ -157,7 +160,11 @@
     <main>
       <!-- Header -->
       <div class="header">
-        <img src="{{company.logo}}" alt="{{company.nomEntreprise}}" />
+        <img
+          class="logo"
+          src="{{company.logo}}"
+          alt="{{company.nomEntreprise}}"
+        />
         <div class="invoice-info">
           <div class="proforma-title">{{facture.type}}</div>
           <div>N°: <span id="invoice-number">{{facture.id}}</span></div>
@@ -207,37 +214,61 @@
         <div class="">
           <h4>Arrêtée la présente Facture à la somme de :</h4>
           <p>{{facture.totalAmountAfterTaxInLetter}} FCFA</p>
+          {{#if facture.paiementModality}}
           <p>
             Modalité de paiement : {{facture.paiementModality}}% à la commande
           </p>
+          {{/if}}
         </div>
         <div class="">
           <table class="totals">
+            {{#if facture.totalAmountAfterTax}}
+            <!-- Montant HT (style normal) -->
             <tr>
               <td>MONTANT TOTAL HT:</td>
               <td class="numeric">{{facture.totalAmount}} FCFA</td>
             </tr>
-            <tr>
-              <td>TVA {{facture.tva}}%:</td>
-              <td class="numeric">{{facture.remiseAmount}} FCFA</td>
-            </tr>
-            <tr>
-              <td class="remise">REMISE COMMERCIALE ({{facture.remise}}%):</td>
-              <td class="numeric remise-amount">
-                -{{facture.remiseAmount}} FCFA
-              </td>
-            </tr>
+
+            <!-- Montant TTC (style orange) -->
             <tr>
               <td class="total-ttc">MONTANT TOTAL TTC :</td>
               <td class="total-ttc-amount">
                 {{facture.totalAmountAfterTax}} FCFA
               </td>
             </tr>
+            {{else}}
+            <!-- Montant HT (style TTC car TTC est null) -->
+            <tr>
+              <td class="total-ttc">MONTANT TOTAL HT :</td>
+              <td class="total-ttc-amount">{{facture.totalAmount}} FCFA</td>
+            </tr>
+            {{/if}} {{#if facture.tva}}
+            <tr>
+              <td>TVA {{facture.tva}}%:</td>
+              <td class="numeric">{{facture.tvaAmount}} FCFA</td>
+            </tr>
+            {{/if}} {{#if facture.remise}}
+            <tr>
+              <td class="remise">REMISE COMMERCIALE ({{facture.remise}}%):</td>
+              <td class="numeric remise-amount">
+                -{{facture.remiseAmount}} FCFA
+              </td>
+            </tr>
+            {{/if}} {{#if facture.totalAmountAfterTax}}
+            <tr>
+              <td class="total-ttc">MONTANT TOTAL TTC :</td>
+              <td class="total-ttc-amount">
+                {{facture.totalAmountAfterTax}} FCFA
+              </td>
+            </tr>
+            {{/if}}
           </table>
         </div>
       </div>
 
+      {{#if facture.detailsSupp}}
       <p class="remark">Remarque : {{facture.detailsSupp}}</p>
+      {{/if}}
 
       <!-- Footer -->
       <div class="footer">
