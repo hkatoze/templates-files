@@ -246,14 +246,6 @@
               <td>MONTANT TOTAL HT:</td>
               <td class="numeric">{{facture.totalAmount}} FCFA</td>
             </tr>
-
-            <!-- Montant TTC (style orange) -->
-            <tr>
-              <td class="total-ttc">MONTANT TOTAL TTC :</td>
-              <td class="total-ttc-amount">
-                {{facture.totalAmountAfterTax}} FCFA
-              </td>
-            </tr>
             {{else}}
             <!-- Montant HT (style TTC car TTC est null) -->
             <tr>
