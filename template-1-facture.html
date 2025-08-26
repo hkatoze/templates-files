@@ -240,27 +240,25 @@
         </div>
         <div class="">
           <table class="totals">
-            {{#if facture.totalAmountAfterTax}}
+           {{#if facture.totalAmountAfterTax}}
             <!-- Montant HT (style normal) -->
             <tr>
               <td>MONTANT TOTAL HT:</td>
               <td class="numeric">{{facture.totalAmount}} FCFA</td>
             </tr>
 
-            {{else}}
             <!-- Montant TTC (style orange) -->
             <tr>
-              <td class="total-ttc">MONTANT TOTAL HT:</td>
+              <td class="total-ttc">MONTANT TOTAL TTC :</td>
               <td class="total-ttc-amount">
-                {{facture.totalAmount}} FCFA
+                {{facture.totalAmountAfterTax}} FCFA
               </td>
             </tr>
-
-             {{/if}}
-              {{#if facture.totalAmountAfterTax}}
+            {{else}}
+            <!-- Montant HT (style TTC car TTC est null) -->
             <tr>
-              <td class="total-ttc">MONTANT TOTAL TTC:</td>
-              <td class="total-ttc-amount">{{facture.totalAmountAfterTax}} FCFA</td>
+              <td class="total-ttc">MONTANT TOTAL HT :</td>
+              <td class="total-ttc-amount">{{facture.totalAmount}} FCFA</td>
             </tr>
             {{/if}} {{#if facture.tva}}
             <tr>
