@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <title>{{facture.type}} {{project.projectName}}</title>
     <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
       body {
         font-family: Arial, sans-serif;
         margin: 40px;
@@ -16,6 +23,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+
+      .footer div {
+        font-size: 12px;
       }
       .bottom {
         width: 100%;
@@ -48,13 +59,18 @@
       .items-table th {
         background-color: orange;
         color: white;
-      }
-      .items-table th,
-      .items-table td {
-        border-bottom: 1px solid #f0eeee;
         padding: 8px;
         text-align: left;
       }
+
+      .items-table td {
+        border-bottom: 1px solid #e2dfdf;
+        padding: 8px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: left;
+      }
+
       .items-table th:nth-child(n + 2) {
         background-color: #faf8f8;
         color: #000;
@@ -138,14 +154,16 @@
 
     <!-- Client Info -->
     <div class="client-info">
-      <p>
+      <div>
         Objet:
         <span id="invoice-object">{{project.projectName}}</span>
-      </p>
-      <p>Client: <span id="client-name">{{client.clientName}}</span></p>
-      <p>Adresse: <span id="client-address">{{client.clientAddresse}}</span></p>
+      </div>
+      <div>Client: <span id="client-name">{{client.clientName}}</span></div>
+      <div>
+        Adresse: <span id="client-address">{{client.clientAdresse}}</span>
+      </div>
     </div>
-
+    <br />
     <!-- Table des articles -->
     <table class="items-table">
       <thead>
@@ -170,12 +188,14 @@
     </table>
 
     <!-- Totaux -->
-
+    <br />  <br />
     <div class="bottom">
       <div class="">
         <h4>Arrêtée la présente Facture à la somme de :</h4>
         <p>{{facture.totalAmountAfterTaxInLetter}} FCFA</p>
-        <p>Modalité de paiement : {{facture.paiementModality}}% à la commande</p>
+        <p>
+          Modalité de paiement : {{facture.paiementModality}}% à la commande
+        </p>
       </div>
       <div class="">
         <table class="totals">
@@ -189,11 +209,15 @@
           </tr>
           <tr>
             <td class="remise">REMISE COMMERCIALE ({{facture.remise}}%):</td>
-            <td class="numeric remise-amount">-{{facture.remiseAmount}} FCFA</td>
+            <td class="numeric remise-amount">
+              -{{facture.remiseAmount}} FCFA
+            </td>
           </tr>
           <tr>
             <td class="total-ttc">MONTANT TOTAL TTC :</td>
-            <td class="total-ttc-amount">{{facture.totalAmountAfterTax}} FCFA</td>
+            <td class="total-ttc-amount">
+              {{facture.totalAmountAfterTax}} FCFA
+            </td>
           </tr>
         </table>
       </div>
@@ -210,7 +234,10 @@
     <br /><br />
     <br />
 
-    <footer style="margin-top: 40px; font-size: 12px; text-align: center">
+    <footer
+      class="footer"
+      style="margin-top: 40px; font-size: 12px; text-align: center"
+    >
       {{company.nomEntreprise}} - {{company.siegeSocial}}- Rccm :
       {{company.rccm}}- Email : {{company.adresseEmailEntreprise}} - Tél :
       {{company.indicatifContactPrimaire}} {{company.contactPrimaire}} -
