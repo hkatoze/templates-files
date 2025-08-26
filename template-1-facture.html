@@ -16,7 +16,7 @@
         margin: 40px;
         color: #333;
       }
-      
+
       /* ton contenu principal doit "prendre l’espace" restant */
       main {
         flex: 1;
@@ -60,8 +60,8 @@
         font-weight: bold;
       }
 
-      .invoice-info #invoice-number{
-        font-size: 24px; 
+      .invoice-info #invoice-number {
+        font-size: 24px;
         color: orange;
       }
       .client-info {
@@ -106,6 +106,7 @@
         width: 100%;
         margin-left: auto;
         border: none;
+        border-spacing: 0;
       }
 
       .totals td {
@@ -154,7 +155,7 @@
       }
 
       #items .designation {
-       text-align: left;
+        text-align: left;
       }
 
       .remark {
@@ -174,7 +175,9 @@
         />
         <div class="invoice-info">
           <div class="proforma-title">{{facture.type}}</div>
-          <div><span id="invoice-number">N°: {{facture.formattedId}}</span></div>
+          <div>
+            <span id="invoice-number">N°: {{facture.formattedId}}</span>
+          </div>
           <div>Date: <span id="invoice-date">{{facture.createDate}}</span></div>
         </div>
       </div>
@@ -222,8 +225,15 @@
           <div>
             <strong>Arrêtée la présente Facture à la somme de :</strong>
           </div>
+
+          {{#if facture.totalAmountAfterTax}}
+          <!-- Montant HT (style normal) -->
           <div>{{facture.totalAmountAfterTaxInLetter}} FCFA</div>
-          {{#if facture.paiementModality}}
+
+          {{else}}
+          <!-- Montant HT (style TTC car TTC est null) -->
+          <div>{{facture.totalAmountInLetter}} FCFA</div>
+          {{/if}} {{#if facture.paiementModality}}
           <p>
             Modalité de paiement : {{facture.paiementModality}}% à la commande
           </p>
