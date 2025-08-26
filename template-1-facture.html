@@ -17,6 +17,18 @@
         color: #333;
       }
 
+      /* ton contenu principal doit "prendre l’espace" restant */
+      main {
+        flex: 1;
+      }
+
+      /* footer collé en bas */
+      footer {
+        margin-top: auto;
+        font-size: 12px;
+        text-align: center;
+      }
+
       .header,
       .footer {
         width: 100%;
@@ -134,7 +146,7 @@
       .footer div {
         text-align: center;
       }
-
+   
       .remark {
         font-style: italic;
         margin-top: 10px;
@@ -142,102 +154,102 @@
     </style>
   </head>
   <body>
-    <!-- Header -->
-    <div class="header">
-      <img src="{{company.logo}}" alt="{{company.nomEntreprise}}" />
-      <div class="invoice-info">
-        <div class="proforma-title">{{facture.type}}</div>
-        <div>N°: <span id="invoice-number">{{facture.id}}</span></div>
-        <div>Date: <span id="invoice-date">{{facture.createDate}}</span></div>
+    <main>
+      <!-- Header -->
+      <div class="header">
+        <img src="{{company.logo}}" alt="{{company.nomEntreprise}}" />
+        <div class="invoice-info">
+          <div class="proforma-title">{{facture.type}}</div>
+          <div>N°: <span id="invoice-number">{{facture.id}}</span></div>
+          <div>Date: <span id="invoice-date">{{facture.createDate}}</span></div>
+        </div>
       </div>
-    </div>
 
-    <!-- Client Info -->
-    <div class="client-info">
-      <div>
-        Objet:
-        <span id="invoice-object">{{project.projectName}}</span>
+      <!-- Client Info -->
+      <div class="client-info">
+        <div>
+          Objet:
+          <span id="invoice-object">{{project.projectName}}</span>
+        </div>
+        <div>Client: <span id="client-name">{{client.clientName}}</span></div>
+        <div>
+          Adresse: <span id="client-address">{{client.clientAdresse}}</span>
+        </div>
       </div>
-      <div>Client: <span id="client-name">{{client.clientName}}</span></div>
-      <div>
-        Adresse: <span id="client-address">{{client.clientAdresse}}</span>
-      </div>
-    </div>
-    <br />
-    <!-- Table des articles -->
-    <table class="items-table">
-      <thead>
-        <tr>
-          <th>DESCRIPTION</th>
-          <th>Qté.</th>
-          <th>Prix.U</th>
-          <th>Montant</th>
-        </tr>
-      </thead>
-      <tbody id="items">
-        <!-- Les lignes d'items seront injectées ici dynamiquement -->
-        {{#each items}}
-        <tr>
-          <td class="numeric">{{this.designation}}</td>
-          <td class="numeric">{{this.quantity}}</td>
-          <td class="numeric">{{this.unitPrice}} FCFA</td>
-          <td class="numeric">{{this.amount}} FCFA</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-
-    <!-- Totaux -->
-    <br />  <br />
-    <div class="bottom">
-      <div class="">
-        <h4>Arrêtée la présente Facture à la somme de :</h4>
-        <p>{{facture.totalAmountAfterTaxInLetter}} FCFA</p>
-        <p>
-          Modalité de paiement : {{facture.paiementModality}}% à la commande
-        </p>
-      </div>
-      <div class="">
-        <table class="totals">
+      <br />
+      <!-- Table des articles -->
+      <table class="items-table">
+        <thead>
           <tr>
-            <td>MONTANT TOTAL HT:</td>
-            <td class="numeric">{{facture.totalAmount}} FCFA</td>
+            <th>DESCRIPTION</th>
+            <th>Qté.</th>
+            <th>Prix.U</th>
+            <th>Montant</th>
           </tr>
+        </thead>
+        <tbody id="items">
+          <!-- Les lignes d'items seront injectées ici dynamiquement -->
+          {{#each items}}
           <tr>
-            <td>TVA {{facture.tva}}%:</td>
-            <td class="numeric">{{facture.remiseAmount}} FCFA</td>
+            <td class="numeric designation">{{this.designation}}</td>
+            <td class="numeric">{{this.quantity}}</td>
+            <td class="numeric">{{this.unitPrice}} FCFA</td>
+            <td class="numeric">{{this.amount}} FCFA</td>
           </tr>
-          <tr>
-            <td class="remise">REMISE COMMERCIALE ({{facture.remise}}%):</td>
-            <td class="numeric remise-amount">
-              -{{facture.remiseAmount}} FCFA
-            </td>
-          </tr>
-          <tr>
-            <td class="total-ttc">MONTANT TOTAL TTC :</td>
-            <td class="total-ttc-amount">
-              {{facture.totalAmountAfterTax}} FCFA
-            </td>
-          </tr>
-        </table>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <!-- Totaux -->
+      <br />
+      <br />
+      <div class="bottom">
+        <div class="">
+          <h4>Arrêtée la présente Facture à la somme de :</h4>
+          <p>{{facture.totalAmountAfterTaxInLetter}} FCFA</p>
+          <p>
+            Modalité de paiement : {{facture.paiementModality}}% à la commande
+          </p>
+        </div>
+        <div class="">
+          <table class="totals">
+            <tr>
+              <td>MONTANT TOTAL HT:</td>
+              <td class="numeric">{{facture.totalAmount}} FCFA</td>
+            </tr>
+            <tr>
+              <td>TVA {{facture.tva}}%:</td>
+              <td class="numeric">{{facture.remiseAmount}} FCFA</td>
+            </tr>
+            <tr>
+              <td class="remise">REMISE COMMERCIALE ({{facture.remise}}%):</td>
+              <td class="numeric remise-amount">
+                -{{facture.remiseAmount}} FCFA
+              </td>
+            </tr>
+            <tr>
+              <td class="total-ttc">MONTANT TOTAL TTC :</td>
+              <td class="total-ttc-amount">
+                {{facture.totalAmountAfterTax}} FCFA
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-    </div>
 
-    <p class="remark">Remarque : {{facture.detailsSupp}}</p>
+      <p class="remark">Remarque : {{facture.detailsSupp}}</p>
 
-    <!-- Footer -->
-    <div class="footer">
-      <div>POUR ACCORD</div>
-      <div>LE PRESTATAIRE</div>
-    </div>
-    <br />
-    <br /><br />
-    <br />
+      <!-- Footer -->
+      <div class="footer">
+        <div>POUR ACCORD</div>
+        <div>LE PRESTATAIRE</div>
+      </div>
+      <br />
+      <br /><br />
+      <br />
+    </main>
 
-    <footer
-      class="footer"
-      style="margin-top: 40px; font-size: 12px; text-align: center"
-    >
+    <footer style="margin-top: 40px; font-size: 12px; text-align: center">
       {{company.nomEntreprise}} - {{company.siegeSocial}}- Rccm :
       {{company.rccm}}- Email : {{company.adresseEmailEntreprise}} - Tél :
       {{company.indicatifContactPrimaire}} {{company.contactPrimaire}} -
