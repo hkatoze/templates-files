@@ -227,12 +227,11 @@
           </div>
 
           {{#if facture.totalAmountAfterTax}}
-          <!-- Montant HT (style normal) -->
           <div>{{facture.totalAmountAfterTaxInLetter}} FCFA</div>
 
           {{else}}
-          <!-- Montant HT (style TTC car TTC est null) -->
           <div>{{facture.totalAmountInLetter}} FCFA</div>
+
           {{/if}} {{#if facture.paiementModality}}
           <p>
             Modalité de paiement : {{facture.paiementModality}}% à la commande
@@ -248,18 +247,20 @@
               <td class="numeric">{{facture.totalAmount}} FCFA</td>
             </tr>
 
+            {{else}}
             <!-- Montant TTC (style orange) -->
             <tr>
-              <td class="total-ttc">MONTANT TOTAL TTC :</td>
+              <td class="total-ttc">MONTANT TOTAL HT:</td>
               <td class="total-ttc-amount">
-                {{facture.totalAmountAfterTax}} FCFA
+                {{facture.totalAmount}} FCFA
               </td>
             </tr>
-            {{else}}
-            <!-- Montant HT (style TTC car TTC est null) -->
+
+             {{/if}}
+              {{#if facture.totalAmountAfterTax}}
             <tr>
-              <td class="total-ttc">MONTANT TOTAL HT :</td>
-              <td class="total-ttc-amount">{{facture.totalAmount}} FCFA</td>
+              <td class="total-ttc">MONTANT TOTAL TTC:</td>
+              <td class="total-ttc-amount">{{facture.totalAmountAfterTax}} FCFA</td>
             </tr>
             {{/if}} {{#if facture.tva}}
             <tr>
