@@ -304,10 +304,15 @@
     <br /><br />
     <br />
     <footer style="margin-top: 40px; font-size: 12px; text-align: center">
-      {{company.nomEntreprise}} - {{company.siegeSocial}}- Rccm :
-      {{company.rccm}}- Email : {{company.adresseEmailEntreprise}} - Tél :
-      {{company.indicatifContactPrimaire}} {{company.contactPrimaire}} -
-      {{company.ifu}} - Site Web : {{company.website}}
+      {{#if company.nomEntreprise}}{{company.nomEntreprise}}{{/if}} {{#if
+      company.siegeSocial}} - {{company.siegeSocial}}{{/if}} {{#if
+      company.rccm}} - RCCM : {{company.rccm}}{{/if}} {{#if
+      company.adresseEmailEntreprise}} - Email :
+      {{company.adresseEmailEntreprise}}{{/if}} {{#if
+      company.indicatifContactPrimaire}} {{#if company.contactPrimaire}} - Tél :
+      {{company.indicatifContactPrimaire}} {{company.contactPrimaire}}{{/if}}
+      {{/if}} {{#if company.ifu}} - {{company.ifu}}{{/if}} {{#if
+      company.website}} - Site Web : {{company.website}}{{/if}}
     </footer>
   </body>
 </html>
