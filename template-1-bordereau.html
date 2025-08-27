@@ -107,54 +107,6 @@
           table td.numeric {
             text-align: right;
           }
-
-          .totals {
-            width: 100%;
-            margin-left: auto;
-            border: none;
-            border-spacing: 0;
-          }
-
-          .totals td {
-            border: none;
-            padding: 10px 0;
-            font-size: 12px;
-          }
-
-          .bottom .totals-left{
-           font-size: 13px;
-          }
-
-          .totals .total-ttc {
-            background-color: var(--main-color);
-            color: white;
-            font-weight: bold;
-            text-align: left;
-            padding: 10px;
-          }
-          .totals .total-ttc-amount {
-            background-color: var(--main-color);
-            color: white;
-            font-weight: bold;
-            text-align: right;
-            padding: 10px;
-          }
-          .totals .remise {
-            border-left: 0.5px solid rgb(218, 216, 216);
-            border-bottom: 0.5px solid rgb(218, 216, 216);
-            border-top: 0.5px solid rgb(218, 216, 216);
-            text-align: left;
-            padding: 5px;
-            padding-right: 10px;
-          }
-          .totals .remise-amount {
-            border-right: 0.5px solid rgb(218, 216, 216);
-            border-bottom: 0.5px solid rgb(218, 216, 216);
-            border-top: 0.5px solid rgb(218, 216, 216);
-            text-align: right;
-            padding: 5px;
-            padding-right: 10px;
-          }
           .footer {
             margin-top: 60px;
             justify-content: space-between;
@@ -166,11 +118,6 @@
 
           #items .designation {
             text-align: left;
-          }
-
-          .remark {
-            font-style: italic;
-            margin-top: 10px;
           }
     </style>
   </head>
@@ -210,8 +157,7 @@
           <tr>
             <th>DESCRIPTION</th>
             <th>Qté.</th>
-            <th>Prix.U</th>
-            <th>Montant</th>
+            <th>Observation</th>
           </tr>
         </thead>
         <tbody id="items">
@@ -220,8 +166,7 @@
           <tr>
             <td class="numeric designation">{{this.designation}}</td>
             <td class="numeric">{{this.quantity}}</td>
-            <td class="numeric">{{this.unitPrice}} FCFA</td>
-            <td class="numeric">{{this.amount}} FCFA</td>
+            <td class="numeric"></td>
           </tr>
           {{/each}}
         </tbody>
@@ -230,70 +175,6 @@
       <!-- Totaux -->
       <br />
       <br />
-      <div class="bottom">
-        <div class="totals-left">
-          <div>
-            <strong>Arrêtée la présente Facture à la somme de :</strong>
-          </div>
-
-          {{#if facture.totalAmountAfterTax}}
-          <div>{{facture.totalAmountAfterTaxInLetter}} FCFA</div>
-
-          {{else}}
-          <div>{{facture.totalAmountInLetter}} FCFA</div>
-
-          {{/if}} {{#if facture.paiementModality}}
-          <p>
-            Modalité de paiement : {{facture.paiementModality}}% à la commande
-          </p>
-          {{/if}}
-        </div>
-        <div class="">
-          <table class="totals">
-            {{#if facture.totalAmountAfterTax}}
-            <!-- Montant HT (style normal) -->
-            <tr>
-              <td>MONTANT TOTAL HT:</td>
-              <td class="numeric">{{facture.totalAmount}} FCFA</td>
-            </tr>
-            {{else}}
-            <!-- Montant HT (style TTC car TTC est null) -->
-            <tr>
-              <td class="total-ttc">MONTANT TOTAL HT :</td>
-              <td class="total-ttc-amount">{{facture.totalAmount}} FCFA</td>
-            </tr>
-            {{/if}} {{#if facture.tva}}
-            <tr>
-              <td>TVA {{facture.tva}}%:</td>
-              <td class="numeric">{{facture.tvaAmount}} FCFA</td>
-            </tr>
-            {{/if}} {{#if facture.remise}}
-            <tr>
-              <td class="remise">REMISE COMMERCIALE ({{facture.remise}}%):</td>
-              <td class="numeric remise-amount">
-                - {{facture.remiseAmount}} FCFA
-              </td>
-            </tr>
-
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            {{/if}} {{#if facture.totalAmountAfterTax}}
-            <tr>
-              <td class="total-ttc">MONTANT TOTAL TTC :</td>
-              <td class="total-ttc-amount">
-                {{facture.totalAmountAfterTax}} FCFA
-              </td>
-            </tr>
-            {{/if}}
-          </table>
-        </div>
-      </div>
-
-      {{#if facture.detailsSupp}}
-      <p class="remark">Remarque : {{facture.detailsSupp}}</p>
-      {{/if}}
     </main>
     <!-- Footer -->
     <div class="footer">
